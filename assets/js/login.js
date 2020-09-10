@@ -25,13 +25,30 @@ $(function() {
             username: $('.zc [name=username]').val(),
             password: $('.zc [name=password]').val()
         }
-        $.post('http://ajax.frontend.itheima.net/api/reguser', data, function(res) {
+        $.post('/api/reguser', data, function(res) {
             console.log(res);
             if (res.status !== 0) {
-                return console.log('注册失败');
+                return layer.msg(res.message)
             }
             layer.msg('注册成功，请登录！')
             $('#showLogin').click()
+        })
+    })
+    $('.dl').submit(function(e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/api/login',
+            type: 'post',
+            data: $(this).serialize(),
+            success: function(res) {
+                if (res.status !== 0) {
+                    return layer.msg(res.message)
+                }
+                layer.msg('登录成功！')
+                console.log(11);
+                localStorage.setItem('token', res.token)
+                location.href = 'index.html'
+            }
         })
     })
 })
