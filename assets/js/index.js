@@ -22,7 +22,13 @@ $(function() {
                     return layer.msg(res.message);
                 }
                 xuanran(res.data)
-            }
+            },
+            // complete: function(res) {
+            //     if (res.responseJSON.status == 1 && res.responseJSON.message == '身份认证失败！') {
+            //         localStorage.removeItem('token')
+            //         location.href = '/login.html'
+            //     }
+            // }
         })
     }
     // 获取并渲染用户头像和昵称
