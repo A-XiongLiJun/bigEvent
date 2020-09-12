@@ -32,6 +32,7 @@ $(function() {
                 if (res.status !== 0) {
                     return layer.msg(res.message)
                 }
+                layer.msg(res.message)
                 window.parent.xinxi()
             }
         })
