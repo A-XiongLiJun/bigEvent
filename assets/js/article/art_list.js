@@ -40,8 +40,7 @@ $(function() {
     // 渲染所有分类
     function initCate() {
         $.ajax({
-            url: '/my/article/list',
-            data: q,
+            url: '/my/article/cates',
             success: function(res) {
                 if (res.status !== 0) {
                     return layer.msg(res.message)
