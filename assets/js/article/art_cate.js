@@ -1,4 +1,5 @@
 $(function() {
+    var form = layui.form
     getCatelist()
         // 获取文章类别
     function getCatelist() {
@@ -42,5 +43,47 @@ $(function() {
             }
         })
     })
+
+    // 编辑按钮
+    // 每打开一个弹层(layer.open)都会返回一个index
+    //关闭的时候关闭对应的变量就行
+    var editAdd = null
+    $('body').on('click', '.btnEdit', function() {
+        editAdd = layer.open({
+            type: 1,
+            area: ['500px', '250px'],
+            title: '添加文章分类',
+            content: $('#dialog-edit').html()
+        });
+        var editID = $(this).attr('data-id')
+        $.ajax({
+            url: `/my/article/cates/${editID}`,
+            success: function(res) {
+                if (res.status !== 0) {
+                    return layer.msg(res.message)
+                }
+                form.val('form-Edit', res.data)
+            }
+        })
+    })
+
+    // 确认修改按钮事件
+    $('body').on('submit', '#form-Edit', function(e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/my/article/updatecate',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(res) {
+                if (res.status !== 0) {
+                    return layer.msg(res.message)
+                }
+                layer.msg(res.message)
+                getCatelist()
+                layer.close(editAdd)
+            }
+        })
+    })
+
 
 })
