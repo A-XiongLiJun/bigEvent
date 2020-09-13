@@ -85,5 +85,25 @@ $(function() {
         })
     })
 
+    // 删除按钮事件
+    $('body').on('click', '.btnDelete', function() {
+        var DeleteID = $(this).attr('data-id')
+        layer.confirm('确认删除?', { icon: 3, title: '提示' }, function(index) {
+            $.ajax({
+                url: `/my/article/deletecate/${DeleteID}`,
+                success: function(res) {
+                    console.log(res);
+                    if (res.status !== 0) {
+                        return layer.msg(res.message)
+                    }
+                    layer.msg(res.message)
+                    getCatelist()
+                }
+            })
+            layer.close(index);
+        });
+    })
+
+
 
 })
