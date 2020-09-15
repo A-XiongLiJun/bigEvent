@@ -53,6 +53,8 @@
 
                 </tbody>
             </table>
+            <!-- 分页区域 -->
+            <div id="renderPage"></div>
         </div>
     </div>
     <script type="text/html" id="tpl-table">
@@ -64,7 +66,7 @@
             <td>{{$value.state}}</td>
             <td>
                 <button type="button" class="layui-btn layui-btn layui-btn-xs">编辑</button>
-                <button type="button" class="layui-btn layui-btn layui-btn-xs layui-btn-danger">删除</button>
+                <button type="button" class="layui-btn layui-btn layui-btn-xs layui-btn-danger btn-delete" data-id="{{$value.Id}}">删除</button>
             </td>
         </tr>
         {{/each}}
